@@ -20,7 +20,7 @@ main(int argc, char *argv[])
 	DOM_Event *evt;
 
 	if (argc < 2) {
-		MSG("Must provide XML filename");
+		MMSG("Must provide XML filename");
 		return EXIT_FAILURE;
 	}
 
@@ -33,7 +33,7 @@ main(int argc, char *argv[])
 	doc = DOM_Implementation_createDocument(NULL, NULL, NULL);
 	if (DOM_DocumentLS_load(doc, argv[1]) == -1) {
 		if (DOM_Exception) {
-			MSG("Event test failed");
+			MMSG("Event test failed");
 		}
 		return EXIT_FAILURE;
 	}
@@ -41,7 +41,7 @@ main(int argc, char *argv[])
 	root = doc->u.Document.documentElement;
 	DOM_EventTarget_addEventListener(root, "Events", &event_fn, event_fn, 1);
 
-	MSG("target[%s]", root->nodeName);
+	MMSG("target[%s]", root->nodeName);
 
 	evt = DOM_DocumentEvent_createEvent(doc, "Events");
 	DOM_Event_initEvent(evt, "Events", 1, 1);

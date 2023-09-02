@@ -35,7 +35,7 @@ main(int argc, char *argv[])
 	doc = DOM_Implementation_createDocument(NULL, NULL, NULL);
 	if (DOM_DocumentLS_load(doc, argv[1]) == -1) {
 		if (DOM_Exception) {
-			MNO(DOM_Exception);
+			MMNO(DOM_Exception);
 		}
 		return EXIT_FAILURE;
 	}

@@ -1,7 +1,8 @@
 prefix     = /usr/local
 includedir = $(prefix)/include
 libdir     = $(prefix)/lib
-CFLAGS     = -g -Wall -W -DPROFILE -DMSGNO -I$(includedir) -L$(libdir) -ldomc -lmba -lencdec
+MBASRC = ../libmba-0.9.1/src
+CFLAGS     = -g -Wall -W -DPROFILE -DMSGNO -I$(includedir) -L$(libdir) -I$(MBASRC) -I../src -L.. -Wl,-rpath=$(PWD)/.. -ldomc
 OBJS       = dump.o e0.o e1.o e2.o e3.o d0.o d4.o
 
 all: $(OBJS)

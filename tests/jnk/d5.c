@@ -38,7 +38,7 @@ main(int argc, char *argv[])
 	}
 	DOM_Exception = 0;
 	if (!d5(argv[1])) {
-		MNO(DOM_Exception);
+		MMNO(DOM_Exception);
 		return EXIT_FAILURE;
 	}
 	return EXIT_SUCCESS;

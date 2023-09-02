@@ -12,12 +12,12 @@ static const char *cnames[] = {
 void
 handleEvent(void *this, DOM_Event *evt)
 {
-	MSG("Event fired: type=%s,target=%s,currentTarget=%s,eventPhase=%d,\n  bubbles=%d,relatedNode=%s,prevValue=%s,newValue=%s,attrName=%s,attrChange=%s", evt->type, evt->target->nodeName, evt->currentTarget->nodeName, evt->eventPhase, evt->bubbles, evt->relatedNode->nodeName, evt->prevValue ? evt->prevValue : "NULL", evt->newValue ? evt->newValue : "NULL", evt->attrName ? evt->attrName : "NULL", cnames[evt->attrChange]);
+	MMSG("Event fired: type=%s,target=%s,currentTarget=%s,eventPhase=%d,\n  bubbles=%d,relatedNode=%s,prevValue=%s,newValue=%s,attrName=%s,attrChange=%s", evt->type, evt->target->nodeName, evt->currentTarget->nodeName, evt->eventPhase, evt->bubbles, evt->relatedNode->nodeName, evt->prevValue ? evt->prevValue : "NULL", evt->newValue ? evt->newValue : "NULL", evt->attrName ? evt->attrName : "NULL", cnames[evt->attrChange]);
 }
 void
 Document_handleEvent(void *this, DOM_Event *evt)
 {
-	MSG("Document event: %s: %s", evt->type, evt->target->nodeName);
+	MMSG("Document event: %s: %s", evt->type, evt->target->nodeName);
 }
 
 int
@@ -27,14 +27,14 @@ main(int argc, char *argv[])
 	DOM_Element *p, *three, *foo, *bar;
 
 	if (argc < 2) {
-		MSG("Must provide XML filename");
+		MMSG("Must provide XML filename");
 		return EXIT_FAILURE;
 	}
 
 	doc = DOM_Implementation_createDocument(NULL, NULL, NULL);
 	if (DOM_DocumentLS_load(doc, argv[1]) == 0) {
 		if (DOM_Exception) {
-			MNO(DOM_Exception);
+			MMNO(DOM_Exception);
 		}
 		return EXIT_FAILURE;
 	}

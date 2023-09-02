@@ -23,7 +23,7 @@ main(int argc, char *argv[])
 	doc = DOM_Implementation_createDocument(NULL, NULL, NULL);
 	if (DOM_DocumentLS_load(doc, argv[1]) == 0 ||
 			DOM_DocumentLS_fwrite(doc, stdout) == 0) {
-		MSG("Failed to process %s", argv[1]);
+		MMSG("Failed to process %s", argv[1]);
 		return EXIT_FAILURE;
 	}
 

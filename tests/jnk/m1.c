@@ -27,11 +27,11 @@ nodeInserted(void *this, DOM_Event *evt)
 			child = DOM_Document_createComment(copy->ownerDocument, evt->target->nodeValue);
 			break;
 		default:
-			MSG("Don't know how to copy this type: %d", evt->target->nodeType);
+			MMSG("Don't know how to copy this type: %d", evt->target->nodeType);
 			return;
 	}
 	if (DOM_Node_appendChild(copy, child) == NULL) {
-		MSG("Append failed");
+		MMSG("Append failed");
 		return;
 	}
 	DOM_EventTarget_addEventListener(evt->target, "DOMNodeInserted", child, nodeInserted, 1);
@@ -50,9 +50,9 @@ nodeRemoved(void *this, DOM_Event *evt)
 	DOM_EventTarget_removeEventListener(evt->target, "DOMNodeInserted", copy->?, nodeInserted, 1);
 	DOM_EventTarget_removeEventListener(evt->target, "DOMNodeRemoved", evt->target, nodeRemoved, 1);
 
-//MSG("%s %p %p", d->copy->nodeName, d->copy->parentNode, d->copy);
+//MMSG("%s %p %p", d->copy->nodeName, d->copy->parentNode, d->copy);
 	if (DOM_Node_removeChild(d->copy->parentNode, d->copy) == NULL) {
-		MSG("Failed to remove child");
+		MMSG("Failed to remove child");
 	}
 }
 
@@ -62,11 +62,11 @@ main(int argc, char *argv[])
 	DOM_Document *d0, *d1;
 
 	if (argc < 2) {
-		MSG("Must provide XML filename");
+		MMSG("Must provide XML filename");
 		return EXIT_FAILURE;
 	}
 	if (!setlocale(LC_CTYPE, "")) {
-			MSG("Can't set locale");
+			MMSG("Can't set locale");
 		return EXIT_FAILURE;
 	}
 
@@ -78,7 +78,7 @@ main(int argc, char *argv[])
 
 	if (DOM_DocumentLS_load(d0, argv[1]) == 0) {
 		if (DOM_Exception) {
-			MSG("Failed to load: %s", argv[1]);
+			MMSG("Failed to load: %s", argv[1]);
 		}
 		return EXIT_FAILURE;
 	}

@@ -341,7 +341,7 @@ main(int argc, const char *argv[])
 	}
 
 	if (expatdump(in) == -1) {
-		MSG("Failure");
+		MMSG("Failure");
 		return EXIT_FAILURE;
 	}
 
