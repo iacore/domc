@@ -11,15 +11,17 @@ SONAME     = lib$(LIBNAME).so.$(MINVERSION)
 SOVERSION  = lib$(LIBNAME).so.$(MAJVERSION)
 DISTRO     = $(LIBNAME)-$(MINVERSION)
 RPM_OPT_FLAGS = -O2
-CFLAGS     = -Wall -W -g -DMSGNO $(RPM_OPT_FLAGS) -I$(includedir) -L$(libdir)
+MBASRC = libmba-0.9.1/src
+CFLAGS     = -Wall -W -g -DMSGNO $(RPM_OPT_FLAGS) -I$(includedir) -L$(libdir) -I$(MBASRC)
 #CFLAGS     = -Wall -W -DMSGNO -I$(includedir) -L$(libdir) $(RPM_OPT_FLAGS) -ansi -pedantic -Wbad-function-cast -Wcast-align -Wcast-qual -Wchar-subscripts -Winline -Wmissing-prototypes -Wnested-externs -Wpointer-arith -Wredundant-decls -Wshadow -Wstrict-prototypes -Wwrite-strings -Wtraditional -Wconversion -Waggregate-return -Wno-parentheses
-OBJS       = src/expatls.o src/events.o src/node.o src/nodelist.o src/namednodemap.o src/dom.o src/timestamp.o src/wcwidth.o src/mbs.o
+OBJS       = src/expatls.o src/events.o src/node.o src/nodelist.o src/namednodemap.o src/dom.o src/timestamp.o src/wcwidth.o src/mbs.o \
+$(MBASRC)/dbug.o $(MBASRC)/stack.o $(MBASRC)/linkedlist.o $(MBASRC)/hashmap.o $(MBASRC)/hexdump.o $(MBASRC)/msgno.o $(MBASRC)/cfg.o $(MBASRC)/pool.o $(MBASRC)/varray.o $(MBASRC)/shellout.o $(MBASRC)/csv.o $(MBASRC)/path.o $(MBASRC)/misc.o $(MBASRC)/text.o $(MBASRC)/eval.o $(MBASRC)/svsem.o $(MBASRC)/allocator.o $(MBASRC)/suba.o $(MBASRC)/time.o $(MBASRC)/bitset.o $(MBASRC)/svcond.o $(MBASRC)/daemon.o $(MBASRC)/diff.o
 MAN        = DOM_CharacterData.3m.gz DOM_Document.3m.gz DOM_Element.3m.gz DOM_Implementation.3m.gz DOM_NamedNodeMap.3m.gz DOM_Node.3m.gz DOM_NodeList.3m.gz DOM_Text.3m.gz
 
 all: $(ARNAME)($(OBJS)) $(SONAME) src/defines.h
 
 $(SONAME): $(OBJS)
-	$(CC) -shared $(OBJS) -L$(libdir) -lmba -lexpat -Wl,-h,$(SOVERSION) -o $(SONAME)
+	$(CC) -shared $(OBJS) -L$(libdir) -lexpat -Wl,-h,$(SOVERSION) -o $(SONAME)
 
 .c.a:
 	$(CC) $(CFLAGS) -c -o $*.o $<
